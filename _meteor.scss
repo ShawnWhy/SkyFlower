@@ -1,0 +1,43 @@
+$angle : 25deg;
+
+.meteorPath{
+    width:100%;
+    position:absolute;
+    transform:rotate($angle)
+}
+
+.petalclosed{
+    position:absolute;
+    width:200%;
+    height:10px;
+    border-radius:50%;
+    transform-origin: center;
+    left:-50%;
+    top:50%;
+}
+
+
+.meteor{
+    height:50px;
+    width:50px;
+   
+    overflow: hidden;
+    position:relative;
+    border-radius:50%;
+
+    .petalclosed{
+
+    }
+}
+
+.meteor2{
+    height:50px;
+    width:50px;
+    overflow: hidden;
+    position:relative;
+
+    .petalclosed{
+        
+    }
+}
+
