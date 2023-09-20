@@ -27,8 +27,22 @@ body {
   transform-origin: center;
   left: -50%;
   top: 50%;
+  transition: left 0.5s;
 }
 
+.meteorGo {
+  transform-origin: center;
+  animation: meteorRotate 2s linear infinite;
+}
+
+@keyframes meteorRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .meteor {
   height: 50px;
   width: 50px;

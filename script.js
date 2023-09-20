@@ -10,11 +10,11 @@ function randomColor1() {
 }
 
 function createMeteor() {
-  var randomHeight = Math.random() * 60 + 20;
+  var randomHeight = Math.random() * 100 - 20;
 
   var meteorPath = $("<div>");
   $(meteorPath).addClass("meteorPath");
-  
+
   $(meteorPath).css("top", randomHeight + "%");
 
   var red = Math.floor(Math.random() * 250 + 100);
@@ -25,11 +25,11 @@ function createMeteor() {
 
   var meteor = $("<div>");
   $(meteor).addClass("meteor");
-  $(meteor).addClass("meteorGo")
+  $(meteor).addClass("meteorGo");
   $(meteor).css("background-color", meteorColor);
-  $(meteor).css("left",0)
+  $(meteor).css("left", 0);
 
-  for (i = 0; i < 11; i++) {
+  for (i = 0; i < 21; i++) {
     let redRand = Math.floor(Math.random() * 100 - 40);
     let greenRand = Math.floor(Math.random() * 100 - 40);
     let blueRand = Math.floor(Math.random() * 100 - 40);
@@ -53,23 +53,72 @@ function createMeteor() {
   $("body").append(meteorPath);
 }
 
+setInterval(() => {
+  createMeteor();
+}, 3000);
 
 setInterval(() => {
-    createMeteor()
-}, 1000);
+  var meteors = $(".meteorGo");
+  // console.log(meteors)
 
-setInterval(() => {
-var meteors = $(".meteorGo")
-console.log(meteors)
-
-meteors.each(function(index, value){
+  meteors.each(function (index, value) {
     let left = $(value).css("left");
-    console.log(left)
-    left = left.split("px")
+    // console.log(left)
+    left = left.split("px");
     left = left[0];
-    console.log(left)
 
-    $(value).css("left", parseInt(left)+5)
-})
+    if (left > 1500) {
+      $(value).parent().remove();
+    }
+    // console.log(left)
 
+    $(value).css("left", parseInt(left) + 5);
+  });
 }, 50);
+
+$(document).on("click", ".meteorGo", (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  console.log("clickmeteor");
+
+  if ($(event.target).hasClass("meteor")) {
+    $(event.target).removeClass("meteorGo");
+    $(event.target).css("overflow", "visible");
+    var petals = $(event.target).find(".petalclosed");
+    //petals
+    petals.each(function (index, value) {
+      var transform = $(value).css("transform");
+      transform = transform + "translateX(80%)";
+      // console.log(left)
+      $(meteor).css("overflow", "visible");
+
+      setTimeout(() => {
+        $(value).css("transform", transform);
+      }, 20 * index);
+    });
+    setTimeout(() => {
+      $(event.target).addClass("meteorStop");
+    }, 500);
+  } else {
+    var meteor = $(event.target).parent();
+     $(meteor).removeClass("meteorGo");
+
+    var petals = $(meteor).find(".petalclosed");
+    //petals
+    petals.each(function (index, value) {
+      var transform = $(value).css("transform");
+      transform = transform + "translateX(80%)";
+      // console.log(left)
+      $(meteor).css("overflow", "visible");
+
+      setTimeout(() => {
+        $(value).css("transform", transform);
+      }, 20 * index);
+    });
+
+    $(meteor).removeClass("meteorGo");
+    setTimeout(() => {
+      $(meteor).addClass("meteorStop");
+    }, 500);
+  }
+});
