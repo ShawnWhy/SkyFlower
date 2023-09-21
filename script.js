@@ -29,7 +29,7 @@ function createMeteor() {
   $(meteor).css("background-color", meteorColor);
   $(meteor).css("left", 0);
 
-  for (i = 0; i < 21; i++) {
+  for (i = 0; i < 18; i++) {
     let redRand = Math.floor(Math.random() * 100 - 40);
     let greenRand = Math.floor(Math.random() * 100 - 40);
     let blueRand = Math.floor(Math.random() * 100 - 40);
@@ -81,8 +81,9 @@ $(document).on("click", ".meteorGo", (event) => {
   event.stopPropagation();
   console.log("clickmeteor");
 
+  growStem(event.clientX, event.clientY);
+
   if ($(event.target).hasClass("meteor")) {
-    $(event.target).removeClass("meteorGo");
     $(event.target).css("overflow", "visible");
     var petals = $(event.target).find(".petalclosed");
     //petals
@@ -90,18 +91,17 @@ $(document).on("click", ".meteorGo", (event) => {
       var transform = $(value).css("transform");
       transform = transform + "translateX(80%)";
       // console.log(left)
-      $(meteor).css("overflow", "visible");
 
       setTimeout(() => {
         $(value).css("transform", transform);
       }, 20 * index);
     });
-    setTimeout(() => {
+    $(event.target).removeClass("meteorGo");
+
+
       $(event.target).addClass("meteorStop");
-    }, 500);
   } else {
     var meteor = $(event.target).parent();
-     $(meteor).removeClass("meteorGo");
 
     var petals = $(meteor).find(".petalclosed");
     //petals
@@ -117,8 +117,63 @@ $(document).on("click", ".meteorGo", (event) => {
     });
 
     $(meteor).removeClass("meteorGo");
-    setTimeout(() => {
+
       $(meteor).addClass("meteorStop");
-    }, 500);
   }
 });
+
+
+$(document).on("click", ".meteorStop .petalclosed", (event) => {
+
+    var petalcolor = $(event.target).css("background-color");
+    var mouseLeft = event.clientX;
+    var mouseTop = event.clientY;
+    var newPetal = $("<div>");
+    var newPetalContainer = $("<div>");
+    $(newPetalContainer).addClass("newPetalContainer");
+     $(newPetal).addClass("newPetal");
+
+    $(newPetal).css("background-color", petalcolor);
+    $(event.target).remove();
+
+    $(newPetalContainer).css("top", mouseTop  + "px");
+    $(newPetalContainer).css("left", mouseLeft - 50 + "px");
+    $(newPetalContainer).append(newPetal)
+    $("body").append(newPetalContainer)
+
+
+})
+
+
+function growStem(mouseX, mouseY){
+  var root = $("<div>")
+  $(root).addClass("stemRoot")
+  $(root).css("top",mouseY);
+  $(root).css("left", mouseX);
+  $("body").append(root);
+  growStem2(root,20,1);
+
+
+}
+
+function growStem2(parent, number, angle){
+  number --;
+  if(number >0){
+  var randNumber = Math.floor(Math.random()*100)
+  
+  var newStem = $("<div>")
+  $(newStem).addClass("stem")
+    if (randNumber > 70 ) {
+      
+    $(newStem).css("transform","rotate("+ (angle*(100-randNumber))+"deg)");
+    angle*=-1
+    }
+
+    $(parent).append(newStem);
+    setTimeout(() => {
+          growStem2(newStem, number, angle);
+
+    }, 50);
+
+  }
+}
