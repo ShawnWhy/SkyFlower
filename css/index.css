@@ -96,6 +96,11 @@ body {
   width: 100%;
   position: absolute;
   transform: rotate(25deg);
+  pointer-events: none;
+}
+
+.meteorPath div {
+  pointer-events: all;
 }
 
 .petalclosed {
