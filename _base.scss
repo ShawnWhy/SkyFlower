@@ -20,3 +20,75 @@ body {
     padding:0px;
     margin:0px ! important;
 }
+@mixin leafmix(){
+    position:absolute;
+    background-color:rgb(77, 113, 23);
+    height:160px;
+    width:60px;
+    left:-100%;
+    border-radius:70%;
+    transform-origin:bottom;
+
+
+    
+
+}
+
+.leaf1{
+    @include leafmix();
+    animation: leaf1 .5s both
+
+}
+
+.leaf2{
+
+    @include leafmix();
+    animation: leaf2 .5s both
+
+}
+
+.leaf3 {
+
+    @include leafmix();
+    animation: leaf3 .5s both
+    
+}
+
+.leaf4 {
+
+    @include leafmix();
+    animation: leaf4 .5s both
+}
+
+@keyframes leaf1 {
+    0%{transform: scale(.2)rotate(0deg);}
+
+    100%{transform: scale(1)rotate(-30deg)}
+    
+}
+@keyframes leaf2 {
+    0%{transform: scale(.2)rotate(0deg);}
+
+    100%{transform: scale(1)rotate(30deg)}
+    
+}
+@keyframes leaf3 {
+    0% {
+        transform: scale(.2)rotate(0deg);
+    }
+
+    100% {
+        transform: scale(1.5)rotate(45deg)
+    }
+
+}
+@keyframes leaf4 {
+    0% {
+        transform: scale(.2)rotate(0deg);
+    }
+
+    100% {
+        transform: scale(1.5)rotate(-40deg)
+    }
+
+}

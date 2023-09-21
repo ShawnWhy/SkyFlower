@@ -94,7 +94,7 @@ $(document).on("click", ".meteorGo", (event) => {
 
       setTimeout(() => {
         $(value).css("transform", transform);
-      }, 20 * index);
+      }, 20 * 1);
     });
     $(event.target).removeClass("meteorGo");
 
@@ -113,7 +113,9 @@ $(document).on("click", ".meteorGo", (event) => {
 
       setTimeout(() => {
         $(value).css("transform", transform);
-      }, 20 * index);
+      }, 20 * 1
+      // index
+      );
     });
 
     $(meteor).removeClass("meteorGo");
@@ -160,6 +162,7 @@ function growStem2(parent, number, angle){
   number --;
   if(number >0){
   var randNumber = Math.floor(Math.random()*100)
+  var randNumber2 = Math.floor(Math.random()*100)
   
   var newStem = $("<div>")
   $(newStem).addClass("stem")
@@ -169,11 +172,35 @@ function growStem2(parent, number, angle){
     angle*=-1
     }
 
+    if(number<11&&randNumber2>80&&number<90&&angle>0){
+
+     insertLeaf(newStem, 1);
+
+    }
+    else if (number < 11 && randNumber2 > 80 && number < 90 && angle < 0) {
+      insertLeaf(newStem, 2);
+    } else if (number < 11 && randNumber2 > 90 && angle > 0) {
+      insertLeaf(newStem, 3);
+    } else if (number < 11 && randNumber2 > 90 && angle < 0) {
+      insertLeaf(newStem, 4);
+    }
+    
+    
     $(parent).append(newStem);
     setTimeout(() => {
           growStem2(newStem, number, angle);
 
-    }, 50);
+    }, 20);
 
   }
 }
+
+function insertLeaf(parent,number){
+var leaf = $("<div>")
+$(leaf).addClass("leaf"+number);
+$(parent).append(leaf)
+
+
+}
+
+createMeteor();

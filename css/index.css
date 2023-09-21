@@ -16,6 +16,82 @@ body {
   margin: 0px !important;
 }
 
+.leaf1 {
+  position: absolute;
+  background-color: rgb(77, 113, 23);
+  height: 160px;
+  width: 60px;
+  left: -100%;
+  border-radius: 70%;
+  transform-origin: bottom;
+  animation: leaf1 0.5s both;
+}
+
+.leaf2 {
+  position: absolute;
+  background-color: rgb(77, 113, 23);
+  height: 160px;
+  width: 60px;
+  left: -100%;
+  border-radius: 70%;
+  transform-origin: bottom;
+  animation: leaf2 0.5s both;
+}
+
+.leaf3 {
+  position: absolute;
+  background-color: rgb(77, 113, 23);
+  height: 160px;
+  width: 60px;
+  left: -100%;
+  border-radius: 70%;
+  transform-origin: bottom;
+  animation: leaf3 0.5s both;
+}
+
+.leaf4 {
+  position: absolute;
+  background-color: rgb(77, 113, 23);
+  height: 160px;
+  width: 60px;
+  left: -100%;
+  border-radius: 70%;
+  transform-origin: bottom;
+  animation: leaf4 0.5s both;
+}
+
+@keyframes leaf1 {
+  0% {
+    transform: scale(0.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(-30deg);
+  }
+}
+@keyframes leaf2 {
+  0% {
+    transform: scale(0.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(30deg);
+  }
+}
+@keyframes leaf3 {
+  0% {
+    transform: scale(0.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.5) rotate(45deg);
+  }
+}
+@keyframes leaf4 {
+  0% {
+    transform: scale(0.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.5) rotate(-40deg);
+  }
+}
 .meteorPath {
   width: 100%;
   position: absolute;
@@ -30,6 +106,7 @@ body {
   transform-origin: center;
   left: -50%;
   top: 50%;
+  transition: transform 0.2s;
 }
 
 .meteorGo {
